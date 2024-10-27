@@ -36,7 +36,8 @@ int command_handler(char* text)
 
     if (!argc)
     {
-        Static::SysMsgTextOut(31, 253, 12);
+        Static::SysMsgTextOut(24, 3016, 1);
+
         return 0;
     }
 
@@ -45,6 +46,9 @@ int command_handler(char* text)
         g_showEffects = true;
         g_showMobEffects = true;
         WritePrivateProfileStringA("ADVANCED", "EFFECTS", "TRUE", g_var->iniFileName.data());
+
+        Static::SysMsgTextOut(24, 3016, 1);
+
         return 0;
     }
 
@@ -53,6 +57,9 @@ int command_handler(char* text)
         g_showEffects = false;
         g_showMobEffects = false;
         WritePrivateProfileStringA("ADVANCED", "EFFECTS", "FALSE", g_var->iniFileName.data());
+
+        Static::SysMsgTextOut(24, 3016, 1);
+
         return 0;
     }
 
@@ -61,6 +68,9 @@ int command_handler(char* text)
         g_showMobEffects = true;
         g_showPets = true;
         WritePrivateProfileStringA("ADVANCED", "PETS", "TRUE", g_var->iniFileName.data());
+
+        Static::SysMsgTextOut(24, 3016, 1);
+
         return 0;
     }
 
@@ -69,6 +79,9 @@ int command_handler(char* text)
         g_showMobEffects = false;
         g_showPets = false;
         WritePrivateProfileStringA("ADVANCED", "PETS", "FALSE", g_var->iniFileName.data());
+
+        Static::SysMsgTextOut(24, 3016, 1);
+
         return 0;
     }
 
@@ -76,6 +89,9 @@ int command_handler(char* text)
     {
         g_showWings = true;
         WritePrivateProfileStringA("ADVANCED", "WINGS", "TRUE", g_var->iniFileName.data());
+
+        Static::SysMsgTextOut(24, 3016, 1);
+
         return 0;
     }
 
@@ -83,6 +99,9 @@ int command_handler(char* text)
     {
         g_showWings = false;
         WritePrivateProfileStringA("ADVANCED", "WINGS", "FALSE", g_var->iniFileName.data());
+
+        Static::SysMsgTextOut(24, 3016, 1);
+
         return 0;
     }
 
@@ -90,6 +109,9 @@ int command_handler(char* text)
     {
         g_showCostumes = true;
         WritePrivateProfileStringA("ADVANCED", "COSTUMES", "TRUE", g_var->iniFileName.data());
+
+        Static::SysMsgTextOut(24, 3016, 1);
+
         return 0;
     }
 
@@ -97,6 +119,9 @@ int command_handler(char* text)
     {
         g_showCostumes = false;
         WritePrivateProfileStringA("ADVANCED", "COSTUMES", "FALSE", g_var->iniFileName.data());
+
+        Static::SysMsgTextOut(24, 3016, 1);
+
         return 0;
     }
 
@@ -107,7 +132,7 @@ unsigned u0x406110 = 0x406110;
 unsigned u0x4094B2 = 0x4094B2;
 void __declspec(naked) naked_0x4094AD()
 {
-    __asm 
+    __asm
     {
         pushad
 
@@ -123,16 +148,16 @@ void __declspec(naked) naked_0x4094AD()
 
 unsigned u0x4867A6 = 0x4867A6;
 unsigned u0x487532 = 0x487532;
-void __declspec(naked) naked_0x4867A1() 
+void __declspec(naked) naked_0x4867A1()
 {
-    __asm 
+    __asm
     {
         pushad
 
         push edi
         call command_handler
-        add esp,0x4
-        test eax,eax
+        add esp, 0x4
+        test eax, eax
 
         popad
 
@@ -142,7 +167,7 @@ void __declspec(naked) naked_0x4867A1()
         push 0x13D4
         jmp u0x4867A6
 
-        _0x487532:
+        _0x487532 :
         jmp u0x487532
     }
 }
@@ -150,18 +175,18 @@ void __declspec(naked) naked_0x4867A1()
 unsigned u0x41634D = 0x41634D;
 void __declspec(naked) naked_0x416343()
 {
-    __asm 
+    __asm
     {
-        cmp dword ptr[g_showCostumes],0x1
+        cmp dword ptr[g_showCostumes], 0x1
         jne label
 
         // original
-        mov dword ptr[esi+0xAC],0x1
+        mov dword ptr[esi + 0xAC], 0x1
         jmp u0x41634D
 
-        label:
-        mov dword ptr[esi+0xAC],0x0
-        jmp u0x41634D
+        label :
+        mov dword ptr[esi + 0xAC], 0x0
+            jmp u0x41634D
     }
 }
 
@@ -169,74 +194,74 @@ unsigned u0x59F092 = 0x59F092;
 unsigned u0x59F4BA = 0x59F4BA;
 void __declspec(naked) naked_0x59F08B()
 {
-    __asm 
+    __asm
     {
-        movzx ecx,byte ptr[edi+0x7]
-        cmp ecx,0x96
+        movzx ecx, byte ptr[edi + 0x7]
+        cmp ecx, 0x96
         je label
 
-        original:
-        mov eax,[edi+0x2]
-        jmp u0x59F092
+        original :
+        mov eax, [edi + 0x2]
+            jmp u0x59F092
 
-        label:
-        cmp dword ptr[g_showCostumes],0x1
-        jne _0x59F4BA
-        jmp original
+            label :
+        cmp dword ptr[g_showCostumes], 0x1
+            jne _0x59F4BA
+            jmp original
 
-        _0x59F4BA:
+            _0x59F4BA :
         jmp u0x59F4BA
     }
 }
 
 unsigned u0x459127 = 0x459127;
-void __declspec(naked) naked_0x459120() 
+void __declspec(naked) naked_0x459120()
 {
-    __asm 
+    __asm
     {
-        cmp dword ptr[g_showEffects],0x1
+        cmp dword ptr[g_showEffects], 0x1
         je _original
 
         retn 0x18
 
         _original:
-        mov eax,[esp+0x4]
-        sub esp,0x10
-        jmp u0x459127
+        mov eax, [esp + 0x4]
+            sub esp, 0x10
+            jmp u0x459127
     }
 }
 
 unsigned u0x43A307 = 0x43A307;
-void __declspec(naked) naked_0x43A300() 
+void __declspec(naked) naked_0x43A300()
 {
-    __asm 
+    __asm
     {
-        cmp dword ptr[g_showEffects],0x1
+        cmp dword ptr[g_showEffects], 0x1
         je _original
 
         retn 0x18
 
         _original:
-        mov eax,[esp+0x4]
-        sub esp,0x10
-        jmp u0x43A307
+        mov eax, [esp + 0x4]
+            sub esp, 0x10
+            jmp u0x43A307
     }
 }
 
 unsigned u0x41A2C7 = 0x41A2C7;
-void __declspec(naked) naked_0x41A2C0() 
+void __declspec(naked) naked_0x41A2C0()
 {
-    __asm 
+    __asm
     {
-        cmp dword ptr[g_showEffects],0x1
+        cmp dword ptr[g_showEffects], 0x1
         je _original
 
         retn 0x1C
 
         _original:
-        mov eax,[esp+0x4]
-        sub esp,0x10
-        jmp u0x41A2C7
+        mov eax, [esp + 0x4]
+            sub esp, 0x10
+            jmp u0x41A2C7
     }
 }
 
@@ -244,56 +269,56 @@ unsigned u0x43A2FA = 0x43A2FA;
 unsigned u0x43A147 = 0x43A147;
 void __declspec(naked) naked_0x43A142()
 {
-    __asm 
+    __asm
     {
-        cmp dword ptr[g_showMobEffects],0x0
+        cmp dword ptr[g_showMobEffects], 0x0
         je _0x43A2FA
-        cmp dword ptr[g_showEffects],0x1
+        cmp dword ptr[g_showEffects], 0x1
         je _original
 
-        _0x43A2FA:
+        _0x43A2FA :
         jmp u0x43A2FA
 
-        _original:
-        mov edi,ecx
-        mov edx,[edi+0x30]
-        jmp u0x43A147
+            _original :
+        mov edi, ecx
+            mov edx, [edi + 0x30]
+            jmp u0x43A147
     }
 }
 
 unsigned u0x418305 = 0x418305;
 unsigned u0x4184CF = 0x4184CF;
-void __declspec(naked) naked_0x4182FF() 
+void __declspec(naked) naked_0x4182FF()
 {
-    __asm 
+    __asm
     {
         // original
-        mov eax,[ebx+0x430]
+        mov eax, [ebx + 0x430]
 
-        cmp dword ptr[g_showPets],0x1
+        cmp dword ptr[g_showPets], 0x1
         jne _0x4184CF
         jmp u0x418305
 
-        _0x4184CF:
+        _0x4184CF :
         jmp u0x4184CF
     }
 }
 
 unsigned u0x41F81D = 0x41F81D;
 unsigned u0x41F9ED = 0x41F9ED;
-void __declspec(naked) naked_0x41F816() 
+void __declspec(naked) naked_0x41F816()
 {
-    __asm 
+    __asm
     {
-         // original
-        mov eax,[esi+0x434]
+        // original
+        mov eax, [esi + 0x434]
         push edi
 
-        cmp dword ptr[g_showWings],0x1
+        cmp dword ptr[g_showWings], 0x1
         jne _0x41F9ED
         jmp u0x41F81D
 
-        _0x41F9ED:
+        _0x41F9ED :
         jmp u0x41F9ED
     }
 }
